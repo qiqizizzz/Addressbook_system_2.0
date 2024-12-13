@@ -317,13 +317,14 @@ public class Mainfunction extends JPanel {
     public static void Function3_displayable() throws IOException {
         String s = "显示全部";
         mydialog d1 = new mydialog(s); // 创建一个对话框对象，标题为“显示全部”
+        d1.setSize(800, 800); // 设置对话框的大小
         JPanel jPanel = new JPanel(); // 创建一个面板对象
-        jPanel.setBounds(600, 300, 500, 500); // 设置面板的位置和大小
+        jPanel.setBounds(600, 300, 800, 800); // 设置面板的位置和大小
         jPanel.setLayout(null); // 设置面板的布局为空，即绝对定位
 
         // 创建一个 JTextArea 用于显示查询结果
         JTextArea textarea = new JTextArea();
-        textarea.setBounds(10, 10, 480, 480); // 设置文本区域的位置和大小
+        textarea.setBounds(10, 10, 780, 780); // 设置文本区域的位置和大小
         textarea.setEditable(false); // 设置为不可编辑
         jPanel.add(textarea); // 将文本区域添加到面板中
 
