@@ -433,6 +433,7 @@ public class Mainfunction extends JPanel {
         phonein2.setBounds(100, 40, 150, 20);
         jPanel2.add(phonein2);
 
+        String oldphone = recordDetails[2]; // 保存旧的电话号码
         JLabel address2 = new JLabel("地址：");
         address2.setBounds(10, 70, 80, 20);
         jPanel2.add(address2);
@@ -483,14 +484,14 @@ public class Mainfunction extends JPanel {
             recordDetails[6] = qqNumberin2.getText();
             recordDetails[7] = categoryin2.getText();
 
-            updateRecord(filePath, recordDetails);
+            updateRecord(filePath, recordDetails,oldphone);
             JOptionPane.showMessageDialog(null, "记录已更新！");
             d2.dispose();
         });
     }
 
     // 更新记录到文件
-    private static void updateRecord(String filePath, String[] updatedDetails) {
+    private static void updateRecord(String filePath, String[] updatedDetails,String oldphone) {
         StringBuilder updatedContent = new StringBuilder(); // 创建一个 StringBuilder 用于存储更新后的文件内容
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
@@ -499,7 +500,7 @@ public class Mainfunction extends JPanel {
             // 逐行读取文件内容
             while ((line = br.readLine()) != null) {
                 // 检查当前行是否与需要更新的记录匹配
-                if (line.startsWith(updatedDetails[0]) && line.split(",")[2].equals(updatedDetails[2])) {
+                if (line.startsWith(updatedDetails[0].split(":")[0]) && line.split(",")[2].equals(oldphone)) {
                     line = String.join(",", updatedDetails); // 如果匹配，则用更新后的记录替换当前行
                 }
                 updatedContent.append(line).append("\n"); // 将更新后的行添加到 StringBuilder 中
@@ -609,7 +610,6 @@ public class Mainfunction extends JPanel {
 
         return isDeleted;
     }
-
 
     // 保存 staff 对象到文件
     public static void saveToFile(staff s) throws IOException {
@@ -894,7 +894,6 @@ class mydialog extends JDialog {
     public mydialog() {
 
     }
-
 
     public mydialog(String s) {
         this.setVisible(true); // 设置为可见
